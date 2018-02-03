@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://aframe.io/releases/0.7.1/aframe.min.js"></script>
+    <script src="./libs/aframe-ar.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js"></script>
+    <title>WebAR: Who am i</title>
+</head>
+
+<a-scene embedded arjs='trackingMethod: best;'>
+    <a-asset-item id="lamp-obj" src="./assets/lamp/lamp.obj"></a-asset-item>
+    <a-asset-item id="lamp-mtl" src="./assets/lamp/lamp.mtl"></a-asset-item>
+
+    <a-asset-item id="minion-obj" src="./assets/minion/minion_for_upload.obj"></a-asset-item>
+    <a-asset-item id="minion-mtl" src="./assets/minion/minion_for_upload.mtl"></a-asset-item>
+
+    <a-asset-item id="lego-obj" src="./assets/lego/lego_obj.obj"></a-asset-item>
+    <a-asset-item id="lego-mtl" src="./assets/lego/lego_obj.mtl"></a-asset-item>
+
+    <a-asset-item id="damagedHelmet" src="./assets/damageHelmet/damagedHelmet.gltf"></a-asset-item>
+
+    <a-marker preset="hiro">
+        <a-entity class="hiro-obj" position='0 0.5 0' scale='0.02 0.02 0.02' obj-model="obj: #minion-obj; mtl: #minion-mtl"></a-entity>
+    </a-marker>
+
+    <a-entity camera></a-entity>
+</a-scene>
+
+<script src="main.js"></script>
+</body>
+</html>
