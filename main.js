@@ -1,40 +1,44 @@
-if (annyang) {
-    // Let's define a command.
-    const commands = {
-        'hello': function () {
-            console.log('hello')
-        },
-        'next1': function () {
-            console.log('next')
-        },
+let isVoiceControlValid = function () {
+    return annyang;
+};
+let getRandomObjectModel = function() {
+    const objectModels = [{
+        objId: '#minion-obj',
+        mtlId: '#minion-mtl'
+    }, {
+        objId: '#lamp-obj',
+        mtlId: '#lamp-mtl'
+    }, {
+        objId: '#lego-obj',
+        mtlId: '#lego-mtl'
+    }];
+    const randObjectModel = getGeneratedModel(objectModels);
+    return randObjectModel;
+}
+
+const updateObjectModel = function () {
+    const objectModel = document.querySelector('.hiro-obj');
+    const generatedObjectModel = getRandomObjectModel();
+    const generatedObjectModelElementValue = `obj: ${generatedObjectModel.objId}; mtl: ${generatedObjectModel.mtlId}`;
+    objectModel.setAttribute('obj-model', generatedObjectModelElementValue);
+};
+
+const getVoiceCommands = function () {
+    return {
         'next': function () {
-            const hiroObject = document.querySelector('.hiro-obj');
-            const generatedObjectModel = getRandomObjectModel();
-            const generatedObjectModelElementValue = `obj: ${generatedObjectModel.objId}; mtl: ${generatedObjectModel.mtlId}`;
-            hiroObject.setAttribute('obj-model', generatedObjectModelElementValue);
-            console.log(hiroObject.getAttribute());
-            console.log(hiroObject);
+            updateObjectModel();
         }
     };
+};
 
-    function getRandomObjectModel() {
-        const objectModels = [{
-            objId: '#minion-obj',
-            mtlId: '#minion-mtl'
-        }, {
-            objId: '#lamp-obj',
-            mtlId: '#lamp-mtl'
-        }, {
-            objId: '#lego-obj',
-            mtlId: '#lego-mtl'
-        }];
-        const randObjectModel = objectModels[Math.floor(Math.random() * objectModels.length)];
-        return randObjectModel;
-    }
+const getGeneratedModel = function (objectModels) {
+    return objectModels[Math.floor(Math.random() * objectModels.length)];
+};
 
-    // Add our commands to annyang
-    annyang.addCommands(commands);
+if (isVoiceControlValid()) {
+    const voiceCommands = getVoiceCommands();
 
-    // Start listening.
+    annyang.addCommands(voiceCommands);
+
     annyang.start();
 }
